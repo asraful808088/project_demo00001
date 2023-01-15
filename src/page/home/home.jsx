@@ -87,9 +87,7 @@ export default function Home() {
             onClick={() => {
               navigate("/settings");
             }}
-            style={{
-              display: isLoin ? "flex" : "none",
-            }}
+            
           >
             Settings
           </div>
@@ -135,9 +133,7 @@ export default function Home() {
                   onClick={() => {
                     navigate("/settings");
                   }}
-                  style={{
-                    display: isLoin ? "flex" : "none",
-                  }}
+                 
                 >
                   settings
                 </div>

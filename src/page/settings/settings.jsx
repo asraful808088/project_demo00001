@@ -1,16 +1,14 @@
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Button from "../../components/button/button";
 import TextInput from "../../components/TextInput/textInput";
-import { getCookie } from "../../data/cookie/cookie";
 import Loading from "../loading/loading";
 import deleteUser from "../operation/delete/delete";
 import callServer from "../operation/update/update";
 import style from "./style.module.css";
-import SERVERLINK from '../../link/server/link'
 export default function Settings() {
   const navigate = useNavigate();
   const [updateOption, changeOption] = useState(true);
@@ -47,36 +45,8 @@ export default function Settings() {
     userEmail: "",
   });
   useEffect(() => {
-    axios({
-      withCredentials: true,
-      method: "get",
-      url: `${SERVERLINK}/`,
-      headers: {
-        authorization: getCookie("coffeeShop"),
-      },
-    })
-      .then((res) => {
-        setLogin(true);
+    setLogin(true);
         setLoading(false);
-        setUpdateData({
-          ...userUpdateData,
-          userEmail: res.data.email,
-        });
-        setDeleteinfo({
-          ...deleteInfo,
-          userEmail: res.data.email,
-        });
-      })
-      .catch((err) => {
-        setLoading(false);
-        try {
-          if (err.response.status) {
-            return;
-          }
-        } catch (error) {
-          toast("network problem.please try again later");
-        }
-      });
   }, []);
   const onChange = (e, deleteData) => {
     if (deleteData) {
